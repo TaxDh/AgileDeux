@@ -11,5 +11,5 @@ package projetsession;
 public abstract class MethodeSoins {
     /*méthode pour chaque type de soin défini de manière générale pour 
     chaque contrat*/
-    
+    //parametre un int pour le numero et le cout, je pense
 }
