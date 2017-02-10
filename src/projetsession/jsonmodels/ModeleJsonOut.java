@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetsession;
+package projetsession.jsonmodels;
 
 /**
  *
  * @author kf891141
  */
-public class EcritureJson {
+public class ModeleJsonOut {
     
 }
