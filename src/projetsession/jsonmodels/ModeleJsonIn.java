@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author kf891141
+ * l'objet que contient le fichier json
  */
 public class ModeleJsonIn {
     private String client;
