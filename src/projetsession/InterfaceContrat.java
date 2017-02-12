@@ -13,5 +13,15 @@ public abstract class InterfaceContrat {
     chaque contrat*/
     //parametre un int pour le numero et le cout, je pense
     
+    //numero 0
     public abstract double massotherapie(double montant);
+    
+    //numero 100
+    public abstract double osteopathie(double montant);
+    
+    //numero 200
+    public abstract double psychologie_individuelle(double montant);
+    
+    //numero 300 a 399
+    public abstract double soin_dentaire(double montant);
 }
