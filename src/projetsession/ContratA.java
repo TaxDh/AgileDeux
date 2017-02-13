@@ -3,30 +3,52 @@
  */
 package projetsession;
 
+import projetsession.jsonmodels.ModeleJsonIn;
+import projetsession.jsonmodels.ModeleJsonOut;
+import projetsession.jsonmodels.Reclamation;
+import projetsession.jsonmodels.Remboursement;
+
+
 /**
  *
  * @author kf891141
  */
-public class ContratA {
+public class ContratA extends InterfaceContrat{
     
+
+    public ContratA(ModeleJsonIn modele) {
+        
+        super(modele);
+    }
+  
+   
+    //Type de soin
     //numero 0
-    public double massotherapie(double montant){
-    return montant * 0.25;
+    public String massotherapie(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.25;
+        return convertirDoubleEnString(montantDouble);
     }
     
     //numero 100
-    public double osteopathie(double montant){
-        return montant * 0.25; 
+    public String osteopathie(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.25;
+        return convertirDoubleEnString(montantDouble);
     }
     
     //numero 200
-    public double psychologie_individuelle(double montant){
-        return montant * 0.25;
+    public String psychologie_individuelle(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.25;
+        return convertirDoubleEnString(montantDouble);
     }
     
     //numero 300 a 399
-    public double soin_dentaire(double montant){
-        return 0.0;
+    public String soin_dentaire(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.0;
+        return convertirDoubleEnString(montantDouble);
     }
     
    

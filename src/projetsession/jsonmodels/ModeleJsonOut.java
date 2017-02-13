@@ -15,10 +15,11 @@ import java.util.List;
 public class ModeleJsonOut {
     private String client;
     private String mois;
-    private List<Reclamation> remboursement;//c'est le meme objet que jsonIn
+    private List<Remboursement> remboursement;//c'est le meme objet que jsonIn
 
     //ne sert a rien de construire l'objet avec parametre
     public ModeleJsonOut() {
+        this.remboursement = new ArrayList<>();
     }
 
  
@@ -38,15 +39,15 @@ public class ModeleJsonOut {
         this.mois = mois;
     }
     
-    public List<Reclamation> getRemboursement() {
+    public List<Remboursement> getRemboursement() {
         return remboursement;
     }
 
-    public void setRemboursement(List<Reclamation> emboursement) {
+    public void setRemboursement(List<Remboursement> emboursement) {
         this.remboursement = remboursement;
     }
     
-    public void addRemboursement(Reclamation nouveauRemboursement) {
+    public void addRemboursement(Remboursement nouveauRemboursement) {
         remboursement.add(nouveauRemboursement);
     }
 }

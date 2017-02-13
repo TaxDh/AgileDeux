@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import projetsession.jsonmodels.ModeleJsonIn;
+import projetsession.jsonmodels.ModeleJsonOut;
 
 /**
  *
@@ -20,8 +22,21 @@ public class ProjetSession {
      */
     public static void main(String[] args) {
         
-        String jsonContents = JsonFileHandler.ouvrireFichier(System.getProperty("user.dir") + "\\resources\\input.json");
-        System.out.println(jsonContents);
+        String inputFilePath = args[0];
+        String outputFilePath = args[1];
+        
+        try{
+            ModeleJsonIn reclamation = JsonFileHandler.ouvrireFichier(inputFilePath);
+            InterfaceContrat nouveauContrat = ContratFactory.instancieContrat(reclamation);
+            ModeleJsonOut test = nouveauContrat.calculRemboursement();
+            JsonFileHandler.ecrireFichier(outputFilePath, test);
+        } catch (InvalidArgumentException e) {
+            //TODO WRITE TO ERROR FILE
+            JsonFileHandler.ecrireFichierErreur(outputFilePath);
+            System.exit(1);
+        }
+                
+        
 
         //pour l'instant je fais tout ici...
         
