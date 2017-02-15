@@ -33,7 +33,7 @@ public class ProjetSession {
         } catch (InvalidArgumentException e) {
             //TODO WRITE TO ERROR FILE
             JsonFileHandler.ecrireFichierErreur(outputFilePath);
-            System.exit(1);
+            System.exit(0);
         }
                 
         

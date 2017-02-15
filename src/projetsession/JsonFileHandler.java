@@ -28,8 +28,15 @@ public class JsonFileHandler {
             System.out.println("Erreur lors de la lecture du fichier JSON. " + e.getLocalizedMessage());
             System.exit(1);
         }
-        
-        JSONObject root = (JSONObject) JSONSerializer.toJSON(jsonText);
+        JSONObject root;
+        try{
+                   root = (JSONObject) JSONSerializer.toJSON(jsonText);
+
+            
+        } catch(net.sf.json.JSONException e){
+            throw new InvalidArgumentException("Arguments invalides");
+            
+        }
         
         String numeroClient = root.getString("client");
         
@@ -117,6 +124,7 @@ public class JsonFileHandler {
         
         try {
             Utf8File.saveStringIntoFile(filePath, erreur.toString(4));
+            
         } catch (IOException ex) {
             System.out.println("Erreur avec le fichier de sortie : " + ex.getLocalizedMessage());
         }
