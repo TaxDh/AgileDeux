@@ -44,11 +44,9 @@ public class ContratB extends InterfaceContrat{
     //numero 200
     public String psychologie_individuelle(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-         if(montantDouble <= 70){
-            montantDouble = montantDouble * 0.100;
-        } else {
+         if(montantDouble > 70){
             montantDouble = 70;
-        }
+         }
         return convertirDoubleEnString(montantDouble);
     }
     
@@ -80,7 +78,7 @@ public class ContratB extends InterfaceContrat{
     //numero 600
     public String physiotherapie(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.100;
+        montantDouble = montantDouble * 1.0;
         return convertirDoubleEnString(montantDouble);
     }
     //numero 700
