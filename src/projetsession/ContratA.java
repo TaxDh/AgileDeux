@@ -51,5 +51,30 @@ public class ContratA extends InterfaceContrat{
         return convertirDoubleEnString(montantDouble);
     }
     
-   
+     //numero 400   
+    public String naturo_acup(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.0;
+        return convertirDoubleEnString(montantDouble);
+    }
+    
+    //numero 500
+    public String chiropratie(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.25;
+        return convertirDoubleEnString(montantDouble);
+    }
+    
+    //numero 600
+    public String physiotherapie(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.40;
+        return convertirDoubleEnString(montantDouble);
+    }
+    //numero 700
+    public String ortho_ergo(String montant){
+        double montantDouble = convertirStringEnDouble(montant);
+        montantDouble = montantDouble * 0.0;
+        return convertirDoubleEnString(montantDouble);
+    }
 }
