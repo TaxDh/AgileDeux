@@ -86,4 +86,17 @@ public abstract class InterfaceContrat {
     
     //numero 300 a 399
     public abstract String soin_dentaire(String montant);
+    
+    //numero 400    
+    public abstract String naturo_acup(String montant);
+    
+    //numero 500
+    public abstract String chiropratie(String montant);
+    
+    //numero 600
+    public abstract String physiotherapie(String montant);
+    
+    //numero 700
+    public abstract String ortho_ergo(String montant);
+    
 }
