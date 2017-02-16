@@ -23,7 +23,7 @@ public class ContratB extends InterfaceContrat{
     public String massotherapie(String montant){
         double montantDouble = convertirStringEnDouble(montant);
         if(montantDouble <= 40){
-            montantDouble = montantDouble * 0.40;
+            montantDouble = montantDouble * 0.50;
         } else {
             montantDouble = 40;
         }
@@ -33,21 +33,29 @@ public class ContratB extends InterfaceContrat{
     //numero 100
     public String osteopathie(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.25;
+         if(montantDouble <= 50){
+            montantDouble = montantDouble * 0.50;
+        } else {
+            montantDouble = 50;
+        }
         return convertirDoubleEnString(montantDouble);
     }
     
     //numero 200
     public String psychologie_individuelle(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.25;
+         if(montantDouble <= 70){
+            montantDouble = montantDouble * 0.100;
+        } else {
+            montantDouble = 70;
+        }
         return convertirDoubleEnString(montantDouble);
     }
     
     //numero 300 a 399
     public String soin_dentaire(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.0;
+        montantDouble = montantDouble * 0.50;
         return convertirDoubleEnString(montantDouble);
     }
     
@@ -61,20 +69,24 @@ public class ContratB extends InterfaceContrat{
     //numero 500
     public String chiropratie(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.25;
+         if(montantDouble <= 50){
+            montantDouble = montantDouble * 0.50;
+        } else {
+            montantDouble = 50;
+        }
         return convertirDoubleEnString(montantDouble);
     }
     
     //numero 600
     public String physiotherapie(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.40;
+        montantDouble = montantDouble * 0.100;
         return convertirDoubleEnString(montantDouble);
     }
     //numero 700
     public String ortho_ergo(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.0;
+        montantDouble = montantDouble * 0.70;
         return convertirDoubleEnString(montantDouble);
     }
 }
