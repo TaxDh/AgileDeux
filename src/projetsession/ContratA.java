@@ -51,7 +51,7 @@ public class ContratA extends InterfaceContrat{
         return convertirDoubleEnString(montantDouble);
     }
     
-     //numero 400   
+    //numero 400   
     public String naturo_acup(String montant){
         double montantDouble = convertirStringEnDouble(montant);
         montantDouble = montantDouble * 0.0;
