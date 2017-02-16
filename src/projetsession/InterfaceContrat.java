@@ -45,6 +45,14 @@ public abstract class InterfaceContrat {
                 strRemboursement = psychologie_individuelle(strMontant);
             } else if(reclamation.getSoins() >= 300 && reclamation.getSoins() < 400){
                 strRemboursement = soin_dentaire(strMontant);
+            } else if(reclamation.getSoins() == 400){
+                strRemboursement = naturo_acup(strMontant);
+            } else if(reclamation.getSoins() == 500){
+                strRemboursement = chiropratie(strMontant);
+            } else if(reclamation.getSoins() == 600){
+                strRemboursement = physiotherapie(strMontant);
+            } else if(reclamation.getSoins() == 700){
+                strRemboursement = ortho_ergo(strMontant);
             }
             
             nouveauRemboursement.setMontant(strRemboursement);
@@ -87,10 +95,10 @@ public abstract class InterfaceContrat {
     //numero 300 a 399
     public abstract String soin_dentaire(String montant);
     
-    //numero 400    
+   //numero 400    
     public abstract String naturo_acup(String montant);
     
-    //numero 500
+   //numero 500
     public abstract String chiropratie(String montant);
     
     //numero 600
