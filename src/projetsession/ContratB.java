@@ -22,7 +22,11 @@ public class ContratB extends InterfaceContrat{
     //numero 0
     public String massotherapie(String montant){
         double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.25;
+        if(montantDouble <= 40){
+            montantDouble = montantDouble * 0.40;
+        } else {
+            montantDouble = 40;
+        }
         return convertirDoubleEnString(montantDouble);
     }
     
