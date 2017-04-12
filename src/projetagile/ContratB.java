@@ -4,14 +4,8 @@
 package projetagile;
 
 import projetagile.jsonmodels.ModeleJsonIn;
-import projetagile.jsonmodels.ModeleJsonOut;
-import projetagile.jsonmodels.Reclamation;
-import projetagile.jsonmodels.Remboursement;
 
-/**
- *
- * @author kf891141
- */
+
 public class ContratB extends InterfaceContrat{
      public ContratB(ModeleJsonIn modele) {
         
@@ -20,85 +14,99 @@ public class ContratB extends InterfaceContrat{
     
     //Type de soin
     //numero 0
-    public String massotherapie(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-        if(montantDouble <= 40){
-            montantDouble = montantDouble * 0.50;
-        } else {
-            montantDouble = 40;
+    @Override
+    public Dollar massotherapie(Dollar montant){
+        Dollar remboursement = montant.calculerRemboursement(0.50);
+        
+        if(remboursement.getMontant() > (new Dollar("40$")).getMontant()){
+            remboursement = new Dollar("40$");
         }
-        return convertirDoubleEnString(montantDouble);
+        return remboursement;
     }
     
     //numero 100
-    public String osteopathie(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-         if(montantDouble <= 50){
-            montantDouble = montantDouble * 0.50;
-        } else {
-            montantDouble = 50;
+    @Override
+    public Dollar osteopathie(Dollar montant){
+        Dollar remboursement = montant.calculerRemboursement(0.50);
+        if(remboursement.getMontant() > (new Dollar("50$")).getMontant()){
+            remboursement = new Dollar("50$");
         }
-        return convertirDoubleEnString(montantDouble);
+            
+        if(remboursement.getMontant() > maximumMensuelOsteopahtie.getMontant()){
+            remboursement.setMontant(maximumMensuelOsteopahtie.getMontant());
+        }
+        maximumMensuelOsteopahtie.soustractionDollar(remboursement);
+        return remboursement;
     }
     
     //numero 150
-    public String kinesitherapie (String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.0;
-        return convertirDoubleEnString(montantDouble);
+    @Override
+    public Dollar kinesitherapie (Dollar montant){
+        return montant.calculerRemboursement(0.0);
     }
     
     //numero 175
-    public String medecin_generalistep (String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.75;
-        return convertirDoubleEnString(montantDouble);
+    @Override
+    public Dollar medecin_generaliste_prive (Dollar montant){
+        Dollar remboursement = montant.calculerRemboursement(0.75);
+        if(remboursement.getMontant() > maximumMensuelMedGenPriv.getMontant()){
+            remboursement.setMontant(maximumMensuelMedGenPriv.getMontant());
+        }
+        maximumMensuelMedGenPriv.soustractionDollar(remboursement);
+        return remboursement;
     }
     
     //numero 200
-    public String psychologie_individuelle(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-         if(montantDouble > 70){
-            montantDouble = 70;
-         }
-        return convertirDoubleEnString(montantDouble);
+    @Override
+    public Dollar psychologie_individuelle(Dollar montant){
+        Dollar remboursement = montant.calculerRemboursement(1.0);
+        if(remboursement.getMontant() > maximumMensuelPsychologieInd.getMontant()){
+            remboursement.setMontant(maximumMensuelPsychologieInd.getMontant());
+        }
+        maximumMensuelPsychologieInd.soustractionDollar(remboursement);
+        return remboursement;
     }
     
     //numero 300 a 399
-    public String soin_dentaire(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.50;
-        return convertirDoubleEnString(montantDouble);
+    @Override
+    public Dollar soin_dentaire(Dollar montant){
+        return montant.calculerRemboursement(0.50);
     }
     
-    //numero 400   
-    public String naturo_acup(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.0;
-        return convertirDoubleEnString(montantDouble);
+    //numero 400
+    @Override
+    public Dollar naturo_acuponcture(Dollar montant){
+        return montant.calculerRemboursement(0.0);
     }
     
     //numero 500
-    public String chiropratie(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-         if(montantDouble <= 50){
-            montantDouble = montantDouble * 0.50;
-        } else {
-            montantDouble = 50;
+    @Override
+    public Dollar chiropratie(Dollar montant){
+        Dollar remboursement = montant.calculerRemboursement(0.50);
+        if(remboursement.getMontant() > (new Dollar("50$")).getMontant()){
+            remboursement = new Dollar("50$");
         }
-        return convertirDoubleEnString(montantDouble);
+        if(remboursement.getMontant() > maximumMensuelChiropratie.getMontant()){
+            remboursement.setMontant(maximumMensuelChiropratie.getMontant());
+        }
+        maximumMensuelChiropratie.soustractionDollar(remboursement);
+        return remboursement;
     }
     
     //numero 600
-    public String physiotherapie(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 1.0;
-        return convertirDoubleEnString(montantDouble);
+    @Override
+    public Dollar physiotherapie(Dollar montant){
+        Dollar remboursement = montant.calculerRemboursement(1.0);
+        if(remboursement.getMontant() > maximumMensuelPhysiotherapie.getMontant()){
+            remboursement.setMontant(maximumMensuelPhysiotherapie.getMontant());
+        }
+        maximumMensuelPhysiotherapie.soustractionDollar(remboursement);
+        return remboursement;
     }
+    
     //numero 700
-    public String ortho_ergo(String montant){
-        double montantDouble = convertirStringEnDouble(montant);
-        montantDouble = montantDouble * 0.70;
-        return convertirDoubleEnString(montantDouble);
+    @Override
+    public Dollar orthophonie_ergotherapie(Dollar montant){
+        return montant.calculerRemboursement(0.70);
     }
 }

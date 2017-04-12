@@ -1,24 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Objet reclamation, celui qui se trouve dans le tableau reclamation
  */
 package projetagile.jsonmodels;
+import projetagile.Dollar;
 
-/**
- *
- * @author rene
- */
 public class Reclamation {
     
     private int soins;
     private String date;
-    private String montant;
+    private Dollar montant;
 
     public Reclamation() {
     }
 
-    public Reclamation(int soins, String date, String montant) {
+    public Reclamation(int soins, String date, Dollar montant) {
         this.soins = soins;
         this.date = date;
         this.montant = montant;
@@ -34,7 +29,7 @@ public class Reclamation {
         return date;
     }
 
-    public String getMontant() {
+    public Dollar getMontant() {
         return montant;
     }
 
@@ -46,7 +41,7 @@ public class Reclamation {
         this.date = date;
     }
 
-    public void setMontant(String montant) {
+    public void setMontant(Dollar montant) {
         this.montant = montant;
     }
 

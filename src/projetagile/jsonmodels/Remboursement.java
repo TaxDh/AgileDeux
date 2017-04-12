@@ -1,24 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Objet remboursement, celui qui se trouve dans le tableau remboursement.
  */
 package projetagile.jsonmodels;
 
-/**
- *
- * @author rene
- */
+import projetagile.Dollar;
+
+
 public class Remboursement {
       
     private int soins;
     private String date;
-    private String montant;
+    private Dollar montant;
 
     public Remboursement() {
     }
 
-    public Remboursement(int soins, String date, String montant) {
+    public Remboursement(int soins, String date, Dollar montant) {
         this.soins = soins;
         this.date = date;
         this.montant = montant;
@@ -34,7 +31,7 @@ public class Remboursement {
         return date;
     }
 
-    public String getMontant() {
+    public Dollar getMontant() {
         return montant;
     }
 
@@ -46,7 +43,7 @@ public class Remboursement {
         this.date = date;
     }
 
-    public void setMontant(String montant) {
+    public void setMontant(Dollar montant) {
         this.montant = montant;
     }
 

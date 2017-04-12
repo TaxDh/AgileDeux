@@ -9,136 +9,98 @@ import projetagile.jsonmodels.ModeleJsonOut;
 import projetagile.jsonmodels.Reclamation;
 import projetagile.jsonmodels.Remboursement;
 
-/**
- *
- * @author kf891141
- */
+
 public abstract class InterfaceContrat {
-    /*méthode pour chaque type de soin défini de manière générale pour 
-    chaque contrat*/
-    
+    protected Dollar maximumMensuelOsteopahtie = new Dollar("250.00$");
+    protected Dollar maximumMensuelMedGenPriv = new Dollar("200.00$");
+    protected Dollar maximumMensuelPsychologieInd = new Dollar("250.00$");
+    protected Dollar maximumMensuelChiropratie = new Dollar("150.00$");
+    protected Dollar maximumMensuelPhysiotherapie = new Dollar("300.00$");
+   
     private ModeleJsonIn modele;
     
     public InterfaceContrat(ModeleJsonIn modele) {
         
         this.modele = modele;
     }
-    //parametre un int pour le numero et le cout, je pense
+
     public ModeleJsonOut calculRemboursement(){
         ModeleJsonOut sortie = new ModeleJsonOut();
-        sortie.setClient(modele.getClient());
+        sortie.setDossier(modele.getTypeContrat() + modele.getClient());
         sortie.setMois(modele.getMois());
         
-        for(Reclamation reclamation : modele.getReclamations()){
-            String strMontant = reclamation.getMontant();
-            String strRemboursement = "";
-            
-            Remboursement nouveauRemboursement = new Remboursement();
-            nouveauRemboursement.setSoins(reclamation.getSoins());
-            nouveauRemboursement.setDate(reclamation.getDate());
-            
-            if(reclamation.getSoins() == 0){
-                strRemboursement =  massotherapie(strMontant);
-            } else if(reclamation.getSoins() == 100){
-                strRemboursement = kinesitherapie(strMontant);
-            } else if(reclamation.getSoins() == 150){
-                strRemboursement = medecin_generalistep(strMontant);
-             } else if(reclamation.getSoins() == 175){
-                strRemboursement = osteopathie(strMontant);
-            } else if(reclamation.getSoins() == 200){
-                strRemboursement = psychologie_individuelle(strMontant);
-            } else if(reclamation.getSoins() >= 300 && reclamation.getSoins() < 400){
-                strRemboursement = soin_dentaire(strMontant);
-            } else if(reclamation.getSoins() == 400){
-                strRemboursement = naturo_acup(strMontant);
-            } else if(reclamation.getSoins() == 500){
-                strRemboursement = chiropratie(strMontant);
-            } else if(reclamation.getSoins() == 600){
-                strRemboursement = physiotherapie(strMontant);
-            } else if(reclamation.getSoins() == 700){
-                strRemboursement = ortho_ergo(strMontant);
-            }
-            
-            nouveauRemboursement.setMontant(strRemboursement);
-            
-            sortie.addRemboursement(nouveauRemboursement);
-        }
-        //modele.addReclamation(nouvelleReclamation);
+        sortie = parcoursReclamation(sortie);
         return sortie;
     }
-    
-    //Methode pour transformer un montant en double
-    public static double convertirStringEnDouble(String strMontant){
-        double montant;
-        String stringSansDollar = strMontant.replace("$", "");
-        
-        if(contientVirgule(stringSansDollar)){
-            stringSansDollar = stringSansDollar.replace(",", ".");
-        }
-        
-        montant = Double.parseDouble(stringSansDollar);
-        
-        return montant;
-    }
-    
-    
-    //methode pour savoir s'il faut remplacer la virgule par un point
-    //dans le montant
-    public static boolean contientVirgule(String montant){
-        boolean reponse = false;
-        for(int i = 0; i < montant.length(); i++){
-            if(montant.charAt(i) == ','){
-                reponse = true;
-            } 
-        }
-        
-        return reponse;
-    }
+
+    public ModeleJsonOut parcoursReclamation(ModeleJsonOut sortie) {
+        for(Reclamation reclamation : modele.getReclamations()){
+            Dollar montant = reclamation.getMontant();
+            Dollar remboursementDollar = new Dollar();
             
+            remboursementDollar = choixSoin(reclamation, remboursementDollar, montant);
+            Remboursement nouveauRemboursement = new Remboursement(reclamation.getSoins(),
+                    reclamation.getDate(), remboursementDollar);
             
-    public static String convertirDoubleEnString(double dblMontant){
-        String montant;
-        
-        montant = String.format("%.2f", dblMontant);//vive le C
-        
-        montant = montant + "$";
-        
-        montant = montant.replace(",", ".");
-        
-        return montant;
+            sortie.ajouterRemboursement(nouveauRemboursement);
+        }
+        return sortie;
+    }
+
+    public Dollar choixSoin(Reclamation reclamation, Dollar remboursementDollar, Dollar montant) {
+        if(reclamation.getSoins() == 0){
+            remboursementDollar =  massotherapie(montant);
+        } else if(reclamation.getSoins() == 100){
+            remboursementDollar = osteopathie(montant);
+        } else if(reclamation.getSoins() == 150){
+            remboursementDollar = kinesitherapie(montant);
+        } else if(reclamation.getSoins() == 175){
+            remboursementDollar = medecin_generaliste_prive(montant);
+        } else if(reclamation.getSoins() == 200){
+            remboursementDollar = psychologie_individuelle(montant);
+        } else if(reclamation.getSoins() >= 300 && reclamation.getSoins() < 400){
+            remboursementDollar = soin_dentaire(montant);
+        } else if(reclamation.getSoins() == 400){
+            remboursementDollar = naturo_acuponcture(montant);
+        } else if(reclamation.getSoins() == 500){
+            remboursementDollar = chiropratie(montant);
+        } else if(reclamation.getSoins() == 600){
+            remboursementDollar = physiotherapie(montant);
+        } else if(reclamation.getSoins() == 700){
+            remboursementDollar = orthophonie_ergotherapie(montant);
+        }
+        return remboursementDollar;
     }
     
     
     //numero 0
-    public abstract String massotherapie(String montant);
+    public abstract Dollar massotherapie(Dollar montant);
     
     //numero 100
-    public abstract String osteopathie(String montant);
+    public abstract Dollar osteopathie(Dollar montant);
     
     //numero 150
-    public abstract String kinesitherapie (String montant);
+    public abstract Dollar kinesitherapie (Dollar montant);
     
     //numero 175
-    public abstract String medecin_generalistep (String montant);
+    public abstract Dollar medecin_generaliste_prive (Dollar montant);
     
     //numero 200
-    public abstract String psychologie_individuelle(String montant);
+    public abstract Dollar psychologie_individuelle(Dollar montant);
     
     //numero 300 a 399
-    public abstract String soin_dentaire(String montant);
+    public abstract Dollar soin_dentaire(Dollar montant);
     
    //numero 400    
-    public abstract String naturo_acup(String montant);
+    public abstract Dollar naturo_acuponcture(Dollar montant);
     
    //numero 500
-    public abstract String chiropratie(String montant);
+    public abstract Dollar chiropratie(Dollar montant);
     
     //numero 600
-    public abstract String physiotherapie(String montant);
+    public abstract Dollar physiotherapie(Dollar montant);
     
     //numero 700
-    public abstract String ortho_ergo(String montant);
-    
-    
-    
+    public abstract Dollar orthophonie_ergotherapie(Dollar montant);
+
 }
